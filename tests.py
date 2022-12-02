@@ -1,17 +1,18 @@
 from phonem import phonem, inversePhonem
 
 frenchTests = [
+    ["DOIGTS", "DOI"],
 	['BEAULAC', 'BOLAK'],
 	['BAULAC', 'BOLAK'],
 	['IMBEAULT', 'INBO'],
 	['DUFAUT', 'DUFO'],
-	['THIBOUTOT', 'TIBOUTOT'],
+	['THIBOUTOT', 'TIBOUTO'],
 	['DEVAUX', 'DEVO'],
 	['RONDEAUX', 'RONDO'],
 	['BOURGAULX', 'BOURGO'],
 	['PINCHAUD', 'PINCHO'],
 	['PEDNAULD', 'PEDNO'],
-	['MAZENOD', 'MASENOD'],
+	['MAZENOD', 'MASENO'],
 	['ARNOLD', 'ARNOL'],
 	['BERTOLD', 'BERTOL'],
 	['BELLAY', 'BELE'],
@@ -33,7 +34,7 @@ frenchTests = [
 	['MEILLER', 'MEYER'],
 	['GUILLON', 'GUYON'],
 	['LAVILLE', 'LAVILLE'],
-	['COUET', 'CWET'],
+	['COUET', 'KWET'],
 	['EDOUARD', 'EDWAR'],
 	['GIROUARD', 'JIRWAR'],
 	['OZOUADE', 'OZWADE'],
@@ -249,6 +250,20 @@ for test in italianTests:
     pho = phonem(test[0], "it")
     invpho = inversePhonem(pho, "it")
     pho = phonem(invpho, "it")
+
+    if pho != test[1]:
+        print(pho)
+        print(f"Should be: {test[1]}")
+        print()
+        raise Exception
+    else:
+        print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
+
+print("\nFrench inverse tests:")
+for test in frenchTests:
+    pho = phonem(test[0], "fr")
+    invpho = inversePhonem(pho, "fr")
+    pho = phonem(invpho, "fr")
 
     if pho != test[1]:
         print(pho)

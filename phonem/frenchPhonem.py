@@ -38,7 +38,7 @@ RULES = {
 	'C-2': [fr"({V})C(?=[EIY])", '\\1SS'],
 	'C-3': ["([^CX])C(?=[EIY])/g", '\\1S'],
 	'C-4': ["^C(?=[EIY])", 'S'],
-	'C-5': ["^C(?=[AOU])", 'K'],
+	'C-5': ["^C(?=[AOUW])", 'K'],
 	'C-6': [fr"({V})C$", '\\1K'],
 	'C-7': [fr"C(?=[{CONSONANTS}CH])", 'K'],
 	'C-8': ["CC(?=[AOU])/g", 'K'],
@@ -67,29 +67,35 @@ RULES = {
 	'C-30': ["^(?:SINT?|SAINT?|SEIN|SEIM|CINQ?)", 'ST-'],
 	'C-31': ["^SAINTE", 'STE-'],
 	'C-32': ["^ST(?!E)", 'ST-'],
-	'C-33': ["^STE", 'STE-']
+	'C-33': ["^STE", 'STE-'],
+	'C-34': ["(?<=[AILNORU])T$", ''],
+	'C-34bis': ["(?<=[ANORU])D$", ''],
+	'C-35': ["GT$", ''],
+	'C-36': [r"^([LFBT])\1", r'\1'],
+
 }
 
 ORDERED_RULES = [
-  'V-14', 'C-28', 'C-28-bis', # START
-  'C-12',
-  'C-9',
-  'C-10',
-  'C-16',
-  'C-17',
-  'C-20',
-  'C-2', 'C-3', 'C-7',
-  'V-2', 'V-3', 'V-4', 'V-5', 'V-6',
-  'V-1',
-  'C-14',
-  'C-11',
-  'C-33', 'C-32', 'C-31', 'C-30', # SAINT
-  'V-15', 'V-17', 'V-18',
-  'V-7', 'V-8', 'V-9', 'V-10', 'V-11', 'V-12', 'V-13', 'V-16', 'V-19', 'V-20', # V
-  'C-1', 'C-4', 'C-5', 'C-6', 'C-8', 'C-13', 'C-15', 'C-18', # C
-  'C-19', 'C-21', 'C-22', 'C-23', 'C-24', 'C-25', 'C-26', 'C-27', # C
-  'C-29', # END
-  'V-14', 'C-28', 'C-28-bis' # ONCE AGAIN
+	'V-14', 'C-28', 'C-28-bis', # START
+	'C-12',
+	'C-9',
+	'C-10',
+	'C-16',
+	'C-17',
+	'C-20',
+	'C-2', 'C-3', 'C-7',
+	'V-2', 'V-3', 'V-4', 'V-5', 'V-6',
+	'V-1',
+	'C-14',
+	'C-11',
+	'C-33', 'C-32', 'C-31', 'C-30', # SAINT
+	'V-15', 'V-17', 'V-18',
+	'V-7', 'V-8', 'V-9', 'V-10', 'V-11', 'V-12', 'V-13', 'V-16', 'V-19', 'V-20', # V
+	'C-1', 'C-4', 'C-5', 'C-6', 'C-8', 'C-13', 'C-15', 'C-18', # C
+	'C-19', 'C-21', 'C-22', 'C-23', 'C-24', 'C-25', 'C-26', 'C-27', # C
+	'C-29', # END
+	'V-14', 'C-28', 'C-28-bis', # ONCE AGAIN
+	'C-34', 'C-34bis', 'C-35', 'C-36'
 ]
 
 FIXING_RULES = [
@@ -114,22 +120,32 @@ def frenchPhonem(name:str):
 
 		code = re.sub(pattern, replacement, code)
 	
+		# print(pattern)
+		# print(code)
+		# print()
+	
 	return code
 
 AUGMENTATIONS = [
-   
+   ["(?!G)O$", ["AUX", "EAUX", "AUT", "O", "AUD"]],
+   ["(?<!G)O(?![NUI])", ["AU", "EAU", "O"]],
+   ["O(?![NU])", ["AU", "O"]],
+   [f"(?<={V})Z(?={V})", ["S"]],
+   [fr"(?<!I)([LFTM])", [r"\1", r"\1\1"]]
 ]
 
 
 
 def frenchInversePhonem(name:str):
-    raise NotImplementedError()
+	code = name.upper()
 
-    code = name.upper()
+	for substitution in AUGMENTATIONS:
+		pattern, replacement = substitution
 
-    for substitution in AUGMENTATIONS:
-        pattern, replacement = substitution
+		code = re.sub(pattern, replacement[random.randint(0, len(replacement)-1)], code)
 
-        code = re.sub(pattern, replacement[random.randint(0, len(replacement)-1)], code)
+		# print(pattern)
+		# print(code)
+		# print()
 
-    return code
+	return code
