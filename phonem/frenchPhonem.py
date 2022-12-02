@@ -100,7 +100,7 @@ ORDERED_RULES = list(map(lambda key:  RULES[key], ORDERED_RULES))
 ORDERED_RULES += FIXING_RULES
 
 
-def phonem(name:str):
+def frenchPhonem(name:str):
 	code = deburr(name).upper()
 	code = re.sub("[^A-Z]", "", code)
 
@@ -108,7 +108,7 @@ def phonem(name:str):
 	for rule in ORDERED_RULES:
 		isGlobal = False
 		pattern, replacement = rule
-		# print(pattern)
+
 		if pattern.endswith("/g"):
 			pattern = pattern[:-2]
 			isGlobal = True
@@ -120,12 +120,5 @@ def phonem(name:str):
 				newCode = re.sub(pattern, replacement, code)
 
 		code = newCode
-		# print(code)
-		# print()
-
 
 	return code
-
-# phonem("Corentin")
-# phonem("Coranthin")
-phonem("PATRITIA")

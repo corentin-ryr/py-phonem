@@ -44,7 +44,7 @@ TRANSLATION = translation(
 
 ACCEPTABLE_LETTERS = set('ABCDLMNORSUVWXYÖ')
 
-def phonem(name):
+def germanPhonem(name):
 
     code = name.upper()
 
@@ -75,3 +75,27 @@ def phonem(name):
             code += letter
 
     return code
+
+INVERSETRANSLATIONS = {
+    "V": ["V", "F", "W"],
+    "C": ["C", "Z","K","G","Q"],
+    "S": ["S", "ß"],
+    "B": ["B", "P"],
+    "D": ["D", "T"],
+    "Y": ["Y", "I", "J"]
+}
+
+AUGMENTATIONS = [
+    ["(?<!A)U/g", ["OU"]],
+    ["OY/g", ["EU"]],
+    ["AY/g", ["EI", "EY"]],
+    ["Ö/g", ["OE"]],
+    ["E/g", ["AE"]],
+    ["KW/g", ["QU"]],
+    ["KW/g", ["QU"]]
+]
+
+
+
+def germanInversePhonem(name:str):
+    pass

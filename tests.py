@@ -1,7 +1,6 @@
-from frenchPhonem import phonem
+from phonem import phonem
 
-
-tests = [
+frenchTests = [
 	['BEAULAC', 'BOLAK'],
 	['BAULAC', 'BOLAK'],
 	['IMBEAULT', 'INBO'],
@@ -134,10 +133,77 @@ tests = [
 	['OSSRIN', 'OSRIN']
 ]
 
-for test in tests:
-	if phonem(test[0]) != test[1]:
-		print(phonem(test[0]))
-		print(f"Should be: {test[1]}")
-		print()
-	else:
-		print(f"OK: {test[0]}")
+
+germanTests = [
+    ['', ''],
+    ['müller', 'MYLR'],
+    ['schmidt', 'CMYD'],
+    ['schneider', 'CNAYDR'],
+    ['fischer', 'VYCR'],
+    ['weber', 'VBR'],
+    ['meyer', 'MAYR'],
+    ['wagner', 'VACNR'],
+    ['schulz', 'CULC'],
+    ['becker', 'BCR'],
+    ['hoffmann', 'OVMAN'],
+    ['schäfer', 'CVR'],
+    ['mair', 'MAYR'],
+    ['bäker', 'BCR'],
+    ['schaeffer', 'CVR'],
+    ['computer', 'COMBUDR'],
+    ['pfeifer', 'VAYVR'],
+    ['pfeiffer', 'VAYVR']
+]
+
+
+italianTests = [
+    ["cassa", "KASSA"],
+    ["gatti", "GATI"],
+    ["grammo", "GRAMO"],
+    ["ceci", "CECI"],
+    ["gente", "JENTE"],
+    ["hotel", "OTEL"],
+    ["hanno", "ANO"],
+    ["semplice", "SEMPLICE"],
+    ["sasso", "SASSO"],
+    ["casa", "KAZA"],
+    ["chiesa", "KIEZA"],
+    ["cosa", "KOZA"],
+    ["pizza", "PITSA"],
+    ["situazione", "SITUATSIONE"],
+    ["zio", "DSIO"],
+    ["chilometro", "KILOMETRO"],
+    ["chele", "KELE"],
+]
+
+
+# for test in italianTests:
+#     pho = phonem(test[0], "it")
+
+#     if pho != test[1]:
+#         print(pho)
+#         print(f"Should be: {test[1]}")
+#         print()
+#     else:
+#         print(f"OK: {test[0]} -> {pho}")
+
+for test in germanTests:
+    pho = phonem(test[0], "de")
+
+    if pho != test[1]:
+        print(pho)
+        print(f"Should be: {test[1]}")
+        print()
+    else:
+        print(f"OK: {test[0]} -> {pho}")
+
+
+# for test in frenchTests:
+#     pho = phonem(test[0], "fr")
+
+#     if pho != test[1]:
+#         print(pho)
+#         print(f"Should be: {test[1]}")
+#         print()
+#     else:
+#         print(f"OK: {test[0]} -> {pho}")
