@@ -245,30 +245,30 @@ for test in germanTests:
         print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
 
 
-print("\nItalian inverse tests:")
-for test in italianTests:
-    pho = phonem(test[0], "it")
-    invpho = inversePhonem(pho, "it")
-    pho = phonem(invpho, "it")
+# print("\nItalian inverse tests:")
+# for test in italianTests:
+#     pho = phonem(test[0], "it")
+#     invpho = inversePhonem(pho, "it")
+#     pho = phonem(invpho, "it")
 
-    if pho != test[1]:
-        print(pho)
-        print(f"Should be: {test[1]}")
-        print()
-        raise Exception
-    else:
-        print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
+#     if pho != test[1]:
+#         print(pho)
+#         print(f"Should be: {test[1]}")
+#         print()
+#         raise Exception
+#     else:
+#         print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
 
-print("\nFrench inverse tests:")
-for test in frenchTests:
-    pho = phonem(test[0], "fr")
-    invpho = inversePhonem(pho, "fr")
-    pho = phonem(invpho, "fr")
+# print("\nFrench inverse tests:")
+# for test in frenchTests:
+#     pho = phonem(test[0], "fr")
+#     invpho = inversePhonem(pho, "fr")
+#     pho = phonem(invpho, "fr")
 
-    if pho != test[1]:
-        print(pho)
-        print(f"Should be: {test[1]}")
-        print()
-        raise Exception
-    else:
-        print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
+#     if pho != test[1]:
+#         print(pho)
+#         print(f"Should be: {test[1]}")
+#         print()
+#         raise Exception
+#     else:
+#         print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
