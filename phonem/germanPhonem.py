@@ -36,19 +36,47 @@ SUBSTITUTIONS = [
     ["AU/g", "A§"],
     ["OU/g", "§"],
 ]
+SUBSTITUTIONS2 = [
+    ["(?:SC|SZ|CZ|TZ|TS)/g", "C"],
+    ["KS/g", "X"],
+    ["(?:PF|PH)/g", "V"],
+    ["QU/g", "KW"],
+    ["^Y", "J"],
+    ["CHS/g", "KS"],
+    ["C(?=[ÄEI])/g", "TS"],
+    ["C(?=[^ÄEIH])/g", "K"],
+    ["(?<=[AOU])CH/g", "R"],
+    ["UE/g", "Y"],
+    ["AE/g", "E"],
+    ["OE/g", "Ö"],
+    ["E[IY]/g", "AY"],
+    ["EU/g", "OY"],
+    ["AU/g", "A§"],
+    ["OU/g", "§"],
+    ["DT?$", "T"],
+    ["Z/g", "TS"],
+    ["CK/g", "K"],
+]
 
 TRANSLATION = translation(
   'ZKGQÇÑßFWPTÁÀÂÃÅÄÆÉÈÊËIJÌÍÎÏÜÝ§ÚÙÛÔÒÓÕØ',
   'CCCCCNSVVBDAAAAAEEEEEEYYYYYYYYUUUUOOOOÖ'
 )
 
+TRANSLATION2 = translation(
+  'ZQÇÑßFÁÀÂÃÅÄÆÉÈÊËIÌÍÎÏÜÝ§ÚÙÛÔÒÓÕØ',
+  'CCCNSVAAAAAEEEEEEYYYYYYYUUUUOOOOÖ'
+)
+
 ACCEPTABLE_LETTERS = set('ABCDLMNORSUVWXYÖ')
+ACCEPTABLE_LETTERS2 = set('ABCDLMNORSUVWXYÖETWGKJP')
 
 def germanPhonem(name):
 
     code = name.upper()
 
-    for substitution in SUBSTITUTIONS:
+    for substitution in SUBSTITUTIONS2:
+        isGlobal = False
         pattern, replacement = substitution
 
         if pattern.endswith("/g"):
@@ -62,16 +90,19 @@ def germanPhonem(name):
                 newCode = re.sub(pattern, replacement, code)
 	    
         code = newCode
+        # print(pattern)
+        # print(code)
+        # print()
 
     translatedCode = ''
     for letter in code:
-        translatedCode += TRANSLATION[letter] if letter in TRANSLATION else letter
+        translatedCode += TRANSLATION2[letter] if letter in TRANSLATION2 else letter
     
     translatedCode = squeeze(translatedCode)
 
     code = ''
     for letter in translatedCode:
-        if letter in ACCEPTABLE_LETTERS:
+        if letter in ACCEPTABLE_LETTERS2:
             code += letter
 
     return code

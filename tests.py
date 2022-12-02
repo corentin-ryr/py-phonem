@@ -136,23 +136,36 @@ frenchTests = [
 
 germanTests = [
     ['', ''],
-    ['müller', 'MYLR'],
-    ['schmidt', 'CMYD'],
-    ['schneider', 'CNAYDR'],
-    ['fischer', 'VYCR'],
-    ['weber', 'VBR'],
-    ['meyer', 'MAYR'],
-    ['wagner', 'VACNR'],
-    ['schulz', 'CULC'],
-    ['becker', 'BCR'],
+    ['müller', 'MYLER'],
+    ['schmidt', 'CMYT'],
+    ['Bad', 'BAT'],
+    ['schneider', 'CNAYDER'],
+    ['fischer', 'VYCER'],
+    ['weber', 'WEBER'],
+    ['meyer', 'MAYER'],
+    ['wagner', 'WAGNER'],
+    ['schulz', 'CULTS'],
+    ['becker', 'BEKER'],
     ['hoffmann', 'OVMAN'],
-    ['schäfer', 'CVR'],
+    ['schäfer', 'CEVER'],
     ['mair', 'MAYR'],
-    ['bäker', 'BCR'],
-    ['schaeffer', 'CVR'],
-    ['computer', 'COMBUDR'],
-    ['pfeifer', 'VAYVR'],
-    ['pfeiffer', 'VAYVR']
+    ['Hobby', 'OBY'],
+    ['Yoga', 'JOGA'],
+    ['bäker', 'BEKER'],
+    ['schaeffer', 'CEVER'],
+    ['computer', 'KOMPUTER'],
+    ['circa', 'TSYRKA'],
+    ['creme', 'KREME'],
+    ['pfeifer', 'VAYVER'],
+    ['pfeiffer', 'VAYVER'],
+    ['typisch', 'TYPYC'],
+    ["tochter", "TORTER"],
+    ["rauchen", "RAUREN"],
+    ["auch", "AUR"],
+    ["manchmal", "MANCMAL"],
+    ["achsel", "AKSEL"],
+    ["sechs", "SEKS"],
+    ["Händedruck", "ENDEDRUK"],
 ]
 
 
@@ -177,16 +190,19 @@ italianTests = [
 ]
 
 
-# for test in italianTests:
-#     pho = phonem(test[0], "it")
+print("\nItalian tests:")
+for test in italianTests:
+    pho = phonem(test[0], "it")
 
-#     if pho != test[1]:
-#         print(pho)
-#         print(f"Should be: {test[1]}")
-#         print()
-#     else:
-#         print(f"OK: {test[0]} -> {pho}")
+    if pho != test[1]:
+        print(pho)
+        print(f"Should be: {test[1]}")
+        print()
+        break
+    else:
+        print(f"OK: {test[0]} -> {pho}")
 
+print("\nGerman tests:")
 for test in germanTests:
     pho = phonem(test[0], "de")
 
@@ -194,16 +210,19 @@ for test in germanTests:
         print(pho)
         print(f"Should be: {test[1]}")
         print()
+        break
     else:
         print(f"OK: {test[0]} -> {pho}")
 
+print("\nFrench tests:")
 
-# for test in frenchTests:
-#     pho = phonem(test[0], "fr")
+for test in frenchTests:
+    pho = phonem(test[0], "fr")
 
-#     if pho != test[1]:
-#         print(pho)
-#         print(f"Should be: {test[1]}")
-#         print()
-#     else:
-#         print(f"OK: {test[0]} -> {pho}")
+    if pho != test[1]:
+        print(pho)
+        print(f"Should be: {test[1]}")
+        print()
+        break
+    else:
+        print(f"OK: {test[0]} -> {pho}")
