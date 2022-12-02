@@ -198,7 +198,7 @@ for test in italianTests:
         print(pho)
         print(f"Should be: {test[1]}")
         print()
-        break
+        raise Exception
     else:
         print(f"OK: {test[0]} -> {pho}")
 
@@ -210,7 +210,7 @@ for test in germanTests:
         print(pho)
         print(f"Should be: {test[1]}")
         print()
-        break
+        raise Exception
     else:
         print(f"OK: {test[0]} -> {pho}")
 
@@ -223,7 +223,7 @@ for test in frenchTests:
         print(pho)
         print(f"Should be: {test[1]}")
         print()
-        break
+        raise Exception
     else:
         print(f"OK: {test[0]} -> {pho}")
 
@@ -239,6 +239,21 @@ for test in germanTests:
         print(pho)
         print(f"Should be: {test[1]}")
         print()
-        break
+        raise Exception
+    else:
+        print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
+
+
+print("\nItalian inverse tests:")
+for test in italianTests:
+    pho = phonem(test[0], "it")
+    invpho = inversePhonem(pho, "it")
+    pho = phonem(invpho, "it")
+
+    if pho != test[1]:
+        print(pho)
+        print(f"Should be: {test[1]}")
+        print()
+        raise Exception
     else:
         print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")

@@ -1,3 +1,4 @@
+import random
 import re
 from pydash.strings import deburr
 
@@ -114,3 +115,21 @@ def frenchPhonem(name:str):
 		code = re.sub(pattern, replacement, code)
 	
 	return code
+
+AUGMENTATIONS = [
+   
+]
+
+
+
+def frenchInversePhonem(name:str):
+    raise NotImplementedError()
+
+    code = name.upper()
+
+    for substitution in AUGMENTATIONS:
+        pattern, replacement = substitution
+
+        code = re.sub(pattern, replacement[random.randint(0, len(replacement)-1)], code)
+
+    return code

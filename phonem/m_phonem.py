@@ -1,6 +1,6 @@
-from phonem.frenchPhonem import frenchPhonem
+from phonem.frenchPhonem import frenchPhonem, frenchInversePhonem
 from phonem.germanPhonem import germanPhonem, germanInversePhonem
-from phonem.italianPhonem import italianPhonem
+from phonem.italianPhonem import italianPhonem, italianInversePhonem
 
 def phonem(name:str, lang:str):
     languages = {"fr", "de", "it"}
@@ -20,9 +20,9 @@ def inversePhonem(name:str, lang:str):
         raise ValueError(f"Language should be one of {languages}")
 
     if lang == "fr":
-        raise NotImplementedError()
+        return frenchInversePhonem(name)
     if lang == "de":
         return germanInversePhonem(name)
     if lang == "it":
-        raise NotImplementedError()
+        return italianInversePhonem(name)
     
