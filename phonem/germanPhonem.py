@@ -1,5 +1,5 @@
 import re
-
+import random
 
 def translation(first, second):
     index = {}
@@ -23,74 +23,49 @@ def squeeze(target):
     return "".join(squeezed)
 
 
-SUBSTITUTIONS = [
-    ["(?:SC|SZ|CZ|TZ|TS)/g", "C"],
-    ["KS/g", "X"],
-    ["(?:PF|PH)/g", "V"],
-    ["QU/g", "KW"],
-    ["UE/g", "Y"],
-    ["AE/g", "E"],
-    ["OE/g", "Ö"],
-    ["E[IY]/g", "AY"],
-    ["EU/g", "OY"],
-    ["AU/g", "A§"],
-    ["OU/g", "§"],
-]
 SUBSTITUTIONS2 = [
-    ["(?:SC|SZ|CZ|TZ|TS)/g", "C"],
-    ["KS/g", "X"],
+    [r"([LT])\1", r"\1"],
+    ["(?:SC|SZ|CZ)/g", "C"],
     ["(?:PF|PH)/g", "V"],
     ["QU/g", "KW"],
     ["^Y", "J"],
-    ["CHS/g", "KS"],
-    ["C(?=[ÄEI])/g", "TS"],
-    ["C(?=[^ÄEIH])/g", "K"],
-    ["(?<=[AOU])CH/g", "R"],
-    ["UE/g", "Y"],
-    ["AE/g", "E"],
-    ["OE/g", "Ö"],
-    ["E[IY]/g", "AY"],
-    ["EU/g", "OY"],
-    ["AU/g", "A§"],
-    ["OU/g", "§"],
+    ["CHS", "KS"],
+    ["C(?=[ÄEIÖ])", "TS"],
+    ["C(?=[^ÄEIH])", "K"],
+    ["(?<=[AOU])CH", "R"],
+    ["UE", "Y"],
+    ["AE", "E"],
+    ["OE", "Ö"],
+    ["E[IY]", "AY"],
+    ["EU", "OY"],
+    ["AU", "A§"],
+    ["OU", "§"],
     ["DT?$", "T"],
-    ["Z/g", "TS"],
-    ["CK/g", "K"],
+    ["Z", "TS"],
+    ["CK", "K"],
 ]
 
-TRANSLATION = translation(
-  'ZKGQÇÑßFWPTÁÀÂÃÅÄÆÉÈÊËIJÌÍÎÏÜÝ§ÚÙÛÔÒÓÕØ',
-  'CCCCCNSVVBDAAAAAEEEEEEYYYYYYYYUUUUOOOOÖ'
-)
 
 TRANSLATION2 = translation(
-  'ZQÇÑßFÁÀÂÃÅÄÆÉÈÊËIÌÍÎÏÜÝ§ÚÙÛÔÒÓÕØ',
-  'CCCNSVAAAAAEEEEEEYYYYYYYUUUUOOOOÖ'
+  'QÇÑßFÁÀÂÃÅÄÆÉÈÊËIÌÍÎÏÜÝ§ÚÙÛÔÒÓÕØ',
+  'CCNSVAAAAAEEEEEEYYYYYYYUUUUOOOOÖ'
 )
 
-ACCEPTABLE_LETTERS = set('ABCDLMNORSUVWXYÖ')
-ACCEPTABLE_LETTERS2 = set('ABCDLMNORSUVWXYÖETWGKJP')
+ACCEPTABLE_LETTERS2 = set('ABCDLMNORSUVWXYÖETGKJP')
 
 def germanPhonem(name):
 
     code = name.upper()
 
     for substitution in SUBSTITUTIONS2:
-        isGlobal = False
         pattern, replacement = substitution
 
         if pattern.endswith("/g"):
             pattern = pattern[:-2]
-            isGlobal = True
 
-        newCode = re.sub(pattern, replacement, code)
-        if isGlobal:
-            while newCode != code:
-                code = newCode
-                newCode = re.sub(pattern, replacement, code)
-	    
-        code = newCode
-        # print(pattern)
+        code = re.sub(pattern, replacement, code)
+  
+	    # print(pattern)
         # print(code)
         # print()
 
@@ -107,26 +82,40 @@ def germanPhonem(name):
 
     return code
 
-INVERSETRANSLATIONS = {
-    "V": ["V", "F", "W"],
-    "C": ["C", "Z","K","G","Q"],
-    "S": ["S", "ß"],
-    "B": ["B", "P"],
-    "D": ["D", "T"],
-    "Y": ["Y", "I", "J"]
-}
 
 AUGMENTATIONS = [
-    ["(?<!A)U/g", ["OU"]],
-    ["OY/g", ["EU"]],
-    ["AY/g", ["EI", "EY"]],
-    ["Ö/g", ["OE"]],
-    ["E/g", ["AE"]],
-    ["KW/g", ["QU"]],
-    ["KW/g", ["QU"]]
+    ["(?<!A)U", ["OU"]],
+    ["Y", ["I", "Ü"]],
+    ["OY", ["EU"]],
+    ["E", ["AE", "E"]],
+    ["AY", ["EI", "EY", "AY"]],
+    ["Ö", ["OE", "Ö"]],
+    ["KW", ["QU", "KW"]],
+    ["C", ["CH", "SCH"]],
+    ["K(?=[^EYÖ])", ["C", "K", "CK"]],
+    ["K(?=[S])", ["KS", "CHS"]],
+    ["C?K", ["K", "CK"]],
+    ["(?<=[AOU])R", ["CH", "R"]],
+    ["TS(?=[^EYÖ])", ["Z", "TS"]],
+    ["TS(?=[EYÖ])", ["Z", "TS", "C"]],
+    ["(?<![ST])S(?![SC])", ["S", "ß"]],
+    ["T$", ["T", "D", "DT"]],
+    ["V", ["V", "F"]],
+    ["^J", ["J", "Y"]],
+    [r"([LFBT])", [r"\1", r"\1\1"]]
 ]
 
 
 
 def germanInversePhonem(name:str):
-    pass
+    code = name.upper()
+
+    for substitution in AUGMENTATIONS:
+        pattern, replacement = substitution
+
+        if pattern.endswith("/g"):
+            pattern = pattern[:-2]
+
+        code = re.sub(pattern, replacement[random.randint(0, len(replacement)-1)], code)
+
+    return code

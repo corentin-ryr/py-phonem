@@ -26,14 +26,7 @@ def italianPhonem(name):
 
         if pattern.endswith("/g"):
             pattern = pattern[:-2]
-            isGlobal = True
 
-        newCode = re.sub(pattern, replacement, code)
-        if isGlobal:
-            while newCode != code:
-                code = newCode
-                newCode = re.sub(pattern, replacement, code)
-	    
-        code = newCode
+        code = re.sub(pattern, replacement, code)
 
     return code

@@ -106,19 +106,11 @@ def frenchPhonem(name:str):
 
 	# Applying rules in order
 	for rule in ORDERED_RULES:
-		isGlobal = False
 		pattern, replacement = rule
 
 		if pattern.endswith("/g"):
 			pattern = pattern[:-2]
-			isGlobal = True
 
-		newCode = re.sub(pattern, replacement, code)
-		if isGlobal:
-			while newCode != code:
-				code = newCode
-				newCode = re.sub(pattern, replacement, code)
-
-		code = newCode
-
+		code = re.sub(pattern, replacement, code)
+	
 	return code

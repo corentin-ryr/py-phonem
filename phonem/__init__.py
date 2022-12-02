@@ -1,1 +1,1 @@
-from phonem.m_phonem import phonem
+from phonem.m_phonem import phonem, inversePhonem

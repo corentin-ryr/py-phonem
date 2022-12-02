@@ -1,4 +1,4 @@
-from phonem import phonem
+from phonem import phonem, inversePhonem
 
 frenchTests = [
 	['BEAULAC', 'BOLAK'],
@@ -226,3 +226,19 @@ for test in frenchTests:
         break
     else:
         print(f"OK: {test[0]} -> {pho}")
+
+print("\n\nReverse phonem ==================================================== \n\n")
+
+print("\nGerman inverse tests:")
+for test in germanTests:
+    pho = phonem(test[0], "de")
+    invpho = inversePhonem(pho, "de")
+    pho = phonem(invpho, "de")
+
+    if pho != test[1]:
+        print(pho)
+        print(f"Should be: {test[1]}")
+        print()
+        break
+    else:
+        print(f"OK: {test[0]} -> {pho}. Inversed word was {invpho}")
