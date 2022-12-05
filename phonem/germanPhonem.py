@@ -64,10 +64,6 @@ def germanPhonem(name):
             pattern = pattern[:-2]
 
         code = re.sub(pattern, replacement, code)
-  
-	    # print(pattern)
-        # print(code)
-        # print()
 
     translatedCode = ''
     for letter in code:

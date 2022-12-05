@@ -120,10 +120,6 @@ def frenchPhonem(name:str):
 
 		code = re.sub(pattern, replacement, code)
 	
-		# print(pattern)
-		# print(code)
-		# print()
-	
 	return code
 
 AUGMENTATIONS = [
@@ -143,9 +139,5 @@ def frenchInversePhonem(name:str):
 		pattern, replacement = substitution
 
 		code = re.sub(pattern, replacement[random.randint(0, len(replacement)-1)], code)
-
-		# print(pattern)
-		# print(code)
-		# print()
 
 	return code
