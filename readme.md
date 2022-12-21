@@ -22,7 +22,7 @@ You can get the phonetic encoding by using the `phonem` method and you can gener
 from phonem import phonem, inversePhonem
 
 name = "typisch"
-pho = phonem(test[0], "de")
+pho = phonem(name, "de")
 inversepho = inversePhonem(pho, "de")
 ```
 
